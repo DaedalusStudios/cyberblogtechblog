@@ -1,0 +1,68 @@
+/* make variables for background, text, and border colors */
+:root {
+    --background-color: rgb(41, 0, 71);;
+    --text-color: cyan;
+    --border-color: white;
+    --header-color: magenta;
+}
+
+
+/* Make the menu background indigo, and the text a light purple links should be #bb0ff */
+body {
+    background-color: rgb(41, 0, 71);
+    color: var(--background-color);
+    font-family: 'Pixelify Sans', sans-serif;
+}
+/* make the menu links have a large square around them when hovering over them */
+.menu a:hover, .postheader a:hover{
+    border: 1px solid var(--header-color);
+     border-radius: 5px;
+}
+.menu a, .postheader a{
+    color: var(--text-color);
+    border: 1px solid rgba(0, 0, 0, 0);
+    padding: 5px 10px;
+    border-radius: 5px;
+}
+
+/* Make the h1 tag have a pixel font*/
+h1 {
+    font-size: 3em;
+    color: var(--text-color);
+}
+
+header{
+    border-bottom: var(--text-color) 2px solid;
+}
+header h1 {
+    font-size: 3em;
+    margin-right:200px;
+}
+
+.menu li{
+    text-align: left;
+    list-style-type: none;
+}
+
+.post {
+    color: var(--text-color);
+    border: 4px 4px 4px 0px;
+    border-color: var(--border-color);
+    border-style: solid;
+    padding: 10px 0px 10px 0px;
+}
+.postheader {
+    background-color: black;
+    color: var(--text-color);
+    border: 4px 4px 4px 0px;
+    border-color: var(--border-color);
+    border-style: solid;
+    padding: 10px 0px 10px 0px;
+}
+.post {
+    background-color: var(--border-color);
+    color: black;
+    margin-bottom:80px;
+}
+
+

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Registry</title>
+  <link rel="stylesheet" href="/css/jass.css">
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <header class="display-flex justify-space-between align-center p-2">
+    <!-- add a menu with Home Dashboard and Login/Logout -->
+    <nav>
+      <ul class="display-flex list-style-none menu">
+        <li>
+          <a href="/">Home</a>
+        </li>
+        <li>
+          <a href="/dashboard">Dashboard</a>
+        </li>
+        <li>
+        {{#if loggedIn}}           
+            <a href="/logout">Logout</a>
+        {{else}}
+            <a href="/login">Login</a>
+        {{/if}}
+        </li>
+      </ul>
+     </nav> 
+    <h1>
+      CyberBlog
+    </h1>
+  </header>
+  <main class="container container-fluid mt-5">
+    {{{ body }}}
+  </main>
+  <footer>
+      
+  </footer>
+</body>
+
+</html>

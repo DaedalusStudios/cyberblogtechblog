@@ -1,0 +1,23 @@
+[
+    {
+        "id": 1,
+        "post_id": 1,
+        "name": "John Doe",
+        "email": "john@doe.com",
+        "comment": "This is a comment"
+    },
+    {
+        "id": 2,
+        "post_id": 1,
+        "name": "John Doe",
+        "email": "john@doe.com",
+        "comment": "I forgot to tell you that I can make two comments"
+    },
+    {
+        "id": 3,
+        "post_id": 1,
+        "name": "John Doe",
+        "email": "john@doe.com",
+        "comment": "Comments are great"
+    }
+]

@@ -1,0 +1,26 @@
+[
+    {
+        "id": 1,
+        "name": "John Doe",
+        "email": "john@doe.com",
+        "subject": "Hello",
+        "message": "Hello, I am John Doe",
+        "date": "2024-02-04"
+    },
+    {
+        "id": 2,
+        "name": "Jane Doe",
+        "email": "Jane@doe.com",
+        "subject": "Hello",
+        "message": "Hello, I am Jane Doe",
+        "date": "2024-02-05"
+    },
+    {
+        "id": 3,
+        "name": "Mark Richardson",
+        "email": "yorgutlover@gmail.com",
+        "subject": "I WANNA PLAY ROBLOXMINECRAFT",
+        "message": "I WANNA PLAY ROBLOXMINECRAFT SO MUCH BUT I KEEP BEING BAD AND LOSING ACCESS TO GAMES",
+        "date": "2024-02-07"
+    }
+]

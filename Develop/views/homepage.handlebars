@@ -1,0 +1,23 @@
+
+{{#each posts as |post| }}
+<div class="row postheader">
+    <div class="col-sm-6">
+      <a href="/post/{{post.id}}">{{post.subject}}</a>        
+    </div>
+    <div class="col-sm-3">
+        {{post.email}}
+    </div>
+    <div class="col-sm-3">
+        {{format_date post.date}}
+    </div>
+</div>
+
+<div class="row post">
+  <div class="col-md-12">
+    <h3>{{post.subject}}</h3>
+    <p>{{post.message}}</p>
+  </div>
+</div>
+
+
+{{/each}}
