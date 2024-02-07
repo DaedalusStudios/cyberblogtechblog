@@ -3,10 +3,10 @@
   ## Description
   As a dev who writes about tech, I want a CMS-style blog site so that I can publish articles, blog posts, and my thoughts and opinions
 
-GIVEN a CMS-style blog site\
-WHEN I visit the site for the first time
-THEN I am presented with the homepage, which includes existing blog posts if any have been posted; navigation links for the homepage and the dashboard; and the option to log in
-WHEN I click on the homepage option
+  GIVEN a CMS-style blog site\
+  WHEN I visit the site for the first time
+  THEN I am presented with the homepage, which includes existing blog posts if any have been posted; navigation links for the homepage and the dashboard; and the option to log in
+  WHEN I click on the homepage option
 THEN I am taken to the homepage
 WHEN I click on any other links in the navigation
 THEN I am prompted to either sign up or sign in
