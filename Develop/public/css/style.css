@@ -65,4 +65,17 @@ header h1 {
     margin-bottom:80px;
 }
 
-
+.comments {
+    float: right;    
+}
+.commentBox {
+    float: left;
+    border: 4px 4px 4px 0px;
+    border-color: var(--header-color);
+    border-style: solid;
+    padding: 10px 10px 10px 10px;
+    margin-bottom: 10px;
+    margin-left: 30px;
+    margin-right: 30px;
+    width:100%;
+}

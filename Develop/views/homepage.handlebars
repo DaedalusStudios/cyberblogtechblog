@@ -16,7 +16,14 @@
   <div class="col-md-12">
     <h3>{{post.subject}}</h3>
     <p>{{post.message}}</p>
-  </div>
+  
+  {{!-- display comments button on right side of div --}}
+  <div class="comments">
+    <button>
+      <a href="/post/{{post.id}}">{{post.commentCount}} 💬</a>
+    </button>
+    </div>
+    </div>
 </div>
 
 
