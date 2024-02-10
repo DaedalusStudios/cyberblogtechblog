@@ -32,28 +32,26 @@ router.post('/login', async (req, res) => {
     });
 
     if (!dbUserData) {
-      res
-        .status(400)
-        .json({ message: 'Incorrect email or password. Please try again!' });
-      return;
+      return res.redirect('/login?message=Incorrect email or password. Please try again!');
     }
 
     const validPassword = await dbUserData.checkPassword(req.body.password);
 
     if (!validPassword) {
-      res
-        .status(400)
-        .json({ message: 'Incorrect email or password. Please try again!' });
-      return;
+      return res.redirect('/login?message=Incorrect email or password. Please try again!!');
     }
 
     // Once the user successfully logs in, set up the sessions variable 'loggedIn'
     req.session.save(() => {
+      req.session.user_id = dbUserData.id;
+      req.session.username = dbUserData.username;
+      req.session.email = dbUserData.email;
       req.session.loggedIn = true;
 
-      res
-        .status(200)
-        .json({ user: dbUserData, message: 'You are now logged in!' });
+      // res
+        // .status(200)
+        // .json({ user: dbUserData, message: 'You are now logged in!' });
+        res.redirect('/');
     });
   } catch (err) {
     console.log(err);
@@ -62,15 +60,17 @@ router.post('/login', async (req, res) => {
 });
 
 // Logout
-router.post('/logout', (req, res) => {
+router.get('/logout', (req, res) => {
   // When the user logs out, destroy the session
   if (req.session.loggedIn) {
     req.session.destroy(() => {
-      res.status(204).end();
+      //res.status(204).end();
+      res.redirect('/');
     });
   } else {
     res.status(404).end();
   }
 });
+
 
 module.exports = router;

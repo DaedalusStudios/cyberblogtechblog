@@ -1,7 +1,8 @@
 const router = require('express').Router();
 const sequelize = require('../config/connection');
 const { Post, Comment } = require('../models');
-//use sessions
+const User = require('../models/User');
+
 
 
 
@@ -34,8 +35,12 @@ router.get('/', async (req, res) => {
   }
 });
 
+
+
 router.get('/post/:id', async (req, res) => {
   try {
+    if (req.session.loggedIn) {
+
     // Fetch a single post by id
     const postData = await Post.findByPk(req.params.id, {
       include: [
@@ -48,12 +53,16 @@ router.get('/post/:id', async (req, res) => {
       post,
       loggedIn: req.session.loggedIn,
     });
+  }
+  else {
+    res.redirect('/login');
+  }
+
   } catch (err) {
     console.log(err);
     res.status(500).json(err);
   }
 });
-
 
 router.get('/user/:id', async (req, res) => {
   try {
@@ -69,5 +78,48 @@ router.get('/user/:id', async (req, res) => {
   }
 }
 )
+
+// redirect to login
+router.get('/login', (req, res) => {
+  if (req.session.loggedIn) {
+    res.redirect('/');
+    return;
+  }
+  const message = req.query.message;
+  res.render('login', { message });
+});
+
+router.get('/dashboard', async (req, res) => {
+  try {
+    const message = req.query.message;
+    if (req.session.loggedIn) {
+    var myEmail = req.session.email;
+    // Fetch a single post by id
+    const postData = await Post.findAll({
+      include: [
+        { model: Comment },
+        { model: User,
+          where: {
+            email: myEmail
+          }
+        }
+      ]
+    });
+
+    const posts = postData.map(post => post.toJSON());
+    res.render('dashboard', {
+      message,
+      posts,
+      loggedIn: req.session.loggedIn,
+    });
+  }
+  else {
+    res.redirect('/login');
+  }
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
 
 module.exports = router;

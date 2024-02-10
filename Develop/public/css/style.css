@@ -79,3 +79,30 @@ header h1 {
     margin-right: 30px;
     width:100%;
 }
+.loginregister {
+    color: var(--text-color);
+    border: 4px 4px 4px 0px;
+    border-color: var(--border-color);
+    border-style: solid;
+    padding: 10px 10px 10px 10px;
+    margin-bottom: 10px;
+    margin-left: 30px;
+    margin-right: 30px;
+}
+.loginregister input {
+    margin-bottom: 10px;
+    margin-left: 30px;
+    margin-right: 30px;
+    margin-top: 10px;
+    padding: 10px 10px 10px 10px;
+}
+.messagebox {
+    color: var(--text-color);
+    border: 4px 4px 4px 0px;
+    border-color: var(--border-color);
+    border-style: solid;
+    padding: 10px 10px 10px 10px;
+    margin-bottom: 10px;
+    margin-left: 30px;
+    margin-right: 30px;
+}

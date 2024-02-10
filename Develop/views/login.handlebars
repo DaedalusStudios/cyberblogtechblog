@@ -1,0 +1,27 @@
+    {{#if message}}
+        <div class="alert alert-danger messagebox" role="alert">
+            <center>
+                <h3>{{message}}</h3>
+            </center>
+        </div>
+    {{/if}}
+<div class="row loginregister">
+  <div class="col-md-12 inputs">
+    <h3>Login</h3>
+        <form action="api/users/login" method="post">
+            <input type="text" name="email" placeholder="Email"><br/>
+            <input type="password" name="password" placeholder="Password"><br/>
+            <input type="submit" value="Login">
+        </form>
+    </div>
+</div>
+<div class="row loginregister">
+  <div class="col-md-12 inputs">
+    <h3>Register</h3>
+        <form action="api/users" method="post">
+            <input type="text" name="email" placeholder="Email"><br/>
+            <input type="password" name="password" placeholder="Password"><br/>
+            <input type="submit" value="Register">
+        </form>
+    </div>
+</div>
