@@ -6,6 +6,7 @@ const helpers = require('./utils/helpers');
 const sequelize = require('./config/connection');
 const session = require('express-session');
 const Handlebars = require('handlebars');
+const bodyParser = require('body-parser');
 
 
 Handlebars.registerHelper('ifEquals', function(arg1, arg2, options) {
@@ -14,10 +15,15 @@ Handlebars.registerHelper('ifEquals', function(arg1, arg2, options) {
 const app = express();
 const PORT = process.env.PORT || 3001;
 
+app.use(bodyParser.json());
+
 const sess = {
   secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: true,
+  cookie: {
+    maxAge: 1 * 60 * 60 * 1000
+  }
 };
 app.use(session(sess));
 

@@ -4,6 +4,19 @@ const { User } = require('../../models');
 // CREATE new user
 router.post('/', async (req, res) => {
   try {
+    // Check if the email already exists in the database
+    const existingUser = await User.findOne({
+      where: {
+        email: req.body.email
+      }
+    });
+
+    if (existingUser) {
+      // If the email already exists, redirect the user to the login page
+      return res.redirect('/login?message=Email already exists. Please log in!');
+    }
+
+    // If the email does not exist, create a new user
     const dbUserData = await User.create({
       username: req.body.username,
       email: req.body.email,
@@ -12,9 +25,11 @@ router.post('/', async (req, res) => {
 
     // Set up sessions with a 'loggedIn' variable set to `true`
     req.session.save(() => {
+      req.session.user_id = dbUserData.id;
+      req.session.username = dbUserData.username;
+      req.session.email = dbUserData.email;
       req.session.loggedIn = true;
-
-      res.status(200).json(dbUserData);
+      res.redirect('/');
     });
   } catch (err) {
     console.log(err);
@@ -48,9 +63,6 @@ router.post('/login', async (req, res) => {
       req.session.email = dbUserData.email;
       req.session.loggedIn = true;
 
-      // res
-        // .status(200)
-        // .json({ user: dbUserData, message: 'You are now logged in!' });
         res.redirect('/');
     });
   } catch (err) {

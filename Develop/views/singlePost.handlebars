@@ -1,3 +1,4 @@
+
 <div class="row postheader">
     <div class="col-sm-6">
       <a href="/post/{{post.id}}">{{post.subject}}</a>        
@@ -12,22 +13,48 @@
 
 <div class="row post">
   <div class="col-md-12">
-    <h3>{{post.subject}}</h3>
     <p>{{post.message}}</p>
     </div>
-  {{!-- display each comment in a div with the class of "comments" --}}
-  
+</div>  
+
+{{!-- Create form to make a new comment --}}
+<div class="row postheader">
+    <div class="col-md-12">Comment on this post:</div>
+</div>
+<div class="row comment">
+<form class="new-comment" method="POST" action="/api/comment">
+  <div class="form-group">
+    <textarea id="comment" rows="4" cols="10" style="width:100%" name="comment" class="form-control" required></textarea>
+  </div>
+  <input type="hidden" name="post_id" value="{{post.id}}">
+  <button type="submit" class="btn btn-primary">Create</button>
+</form>
+</div>
     {{#each post.comments as |comment|}}
-    <div class="commentBox">
-      <p>{{comment.email}}  {{format_date comment.date}}</p>
-      <p>{{comment.comment}}</p>
-      {{#ifEquals comment.email user.email}}
-        <button class="delete-comment" data-comment-id={{comment.id}}>Delete</button>
+    <div class="row postheader">
+    <div class="col-sm-6">
+    </div>
+    <div class="col-sm-3">
+        {{comment.email}}
+    </div>
+    <div class="col-sm-3">
+        {{format_date comment.date}}
+    </div>
+</div>
+    <div class="row comment">
+      <div class="col-md-11">
+        <p>{{comment.comment}}</p>
+      </div>
+      
+      {{#ifEquals ../sessionEmail comment.email}}
+        <div class="col-md-1">
+        <button class="btn btn-danger" data-comment-id={{comment.id}}>Delete</button>
+        </div>
         {{/ifEquals}}
         </div>
     {{/each}}
     
     
-</div>
+
 
 

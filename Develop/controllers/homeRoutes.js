@@ -35,23 +35,21 @@ router.get('/', async (req, res) => {
   }
 });
 
-
-
 router.get('/post/:id', async (req, res) => {
   try {
     if (req.session.loggedIn) {
-
+    console.log(`This is the failure: ${req.session.email}`);
     // Fetch a single post by id
     const postData = await Post.findByPk(req.params.id, {
       include: [
         { model: Comment }
       ]
     });
-
     const post = postData.toJSON();
     res.render('singlePost', {
       post,
       loggedIn: req.session.loggedIn,
+      sessionEmail: req.session.email
     });
   }
   else {
@@ -79,7 +77,6 @@ router.get('/user/:id', async (req, res) => {
 }
 )
 
-// redirect to login
 router.get('/login', (req, res) => {
   if (req.session.loggedIn) {
     res.redirect('/');
@@ -121,5 +118,17 @@ router.get('/dashboard', async (req, res) => {
     res.status(500).json(err);
   }
 });
+
+router.get('/post', (req, res) => {
+  if (req.session.loggedIn) {
+    res.render('post', {
+      loggedIn: req.session.loggedIn,
+    });
+  }
+  else {
+    res.redirect('/login');
+  }
+}
+);
 
 module.exports = router;
