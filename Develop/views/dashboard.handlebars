@@ -1,3 +1,4 @@
+
 {{#if message}}
     <div class="alert alert-danger messagebox" role="alert">
         <center>
@@ -41,10 +42,20 @@
 
 <div class="row post">
   <div class="col-md-12">
-    <h3>{{post.subject}}</h3>
+    <h3>{{post.subject}}
+    <a href="/editPost/{{post.id}}"><button class="btn btn-sm btn-primary">Edit Post</button></a>
+    </h3>
     <p>{{post.message}}</p>
+      <div class="comments">
+    <button>
+      <a href="/post/{{post.id}}">{{post.commentCount}} 💬</a>
+    </button>
+    
+    {{#ifEquals ../sessionEmail post.email}}
+        <button class="delete-post btn btn-sm btn-danger" data-post-id={{post.id}}>Delete Post</button>
+    {{/ifEquals}}
     </div>
-  {{!-- display each comment in a div with the class of "comments" --}}
+    </div>
   
     {{#each post.comments as |comment|}}
     <div class="commentBox">

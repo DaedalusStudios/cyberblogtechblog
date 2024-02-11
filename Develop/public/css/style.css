@@ -108,6 +108,9 @@ header h1 {
     padding: 10px 10px 10px 10px;
     margin-bottom: 40px;
 }
+.post p {
+    white-space: pre-line; /* or pre-wrap */
+}
 
 .post input {
     margin-bottom: 10px;
@@ -124,7 +127,7 @@ header h1 {
     border-style: solid;
     padding: 10px 10px 10px 10px;
     margin-bottom: 40px;
-    
+    white-space: pre-line; /* or pre-wrap */
 }
 .comment input {
     margin-bottom: 10px;

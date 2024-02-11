@@ -91,22 +91,38 @@ router.get('/dashboard', async (req, res) => {
     const message = req.query.message;
     if (req.session.loggedIn) {
     var myEmail = req.session.email;
-    // Fetch a single post by id
+    console.log(myEmail);
+    
     const postData = await Post.findAll({
-      include: [
-        { model: Comment },
-        { model: User,
           where: {
             email: myEmail
-          }
-        }
-      ]
+          },
     });
 
     const posts = postData.map(post => post.toJSON());
     res.render('dashboard', {
       message,
       posts,
+      sessionEmail: req.session.email,
+      loggedIn: req.session.loggedIn,
+    });
+  }
+  else {
+    res.redirect('/login');
+  }
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
+
+router.get('/editPost/:id', async (req, res) => {
+  try {
+    if (req.session.loggedIn) {
+    const postData = await Post.findByPk(req.params.id);
+    const post = postData.toJSON();
+    res.render('editPost', {
+      post,
       loggedIn: req.session.loggedIn,
     });
   }

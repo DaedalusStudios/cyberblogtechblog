@@ -1,0 +1,32 @@
+
+<div class="row postheader">
+    <div class="col-sm-6">
+      <a href="/post/{{post.id}}">{{post.subject}}</a>        
+    </div>
+    <div class="col-sm-3">
+        {{post.email}}
+    </div>
+    <div class="col-sm-3">
+        {{format_date post.date}}
+    </div>
+</div>
+
+<div class="row post">
+  <div class="col-md-12">
+    <form id="editPostForm" action="/api/post/{{post.id}}" method="post">
+      <div class="form-group">
+        <label for="subject">Subject</label>
+        <input type="text" class="form-control" id="subject" name="subject" value="{{post.subject}}" style="width:100%" required>
+      </div>
+      <div class="form-group">
+        <label for="message">Message</label>
+        <textarea class="form-control" id="message" name="message" rows="10" cols="50" style="width:100%" requried>{{post.message}}</textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Edit</button>
+</div>  
+
+
+    
+
+
+
