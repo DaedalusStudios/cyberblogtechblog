@@ -78,13 +78,20 @@ router.get('/user/:id', async (req, res) => {
 )
 
 router.get('/login', (req, res) => {
+  try {
   if (req.session.loggedIn) {
     res.redirect('/');
     return;
   }
   const message = req.query.message;
   res.render('login', { message });
+  }
+  catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
 });
+
 
 router.get('/dashboard', async (req, res) => {
   try {
