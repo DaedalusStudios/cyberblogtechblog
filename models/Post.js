@@ -1,7 +1,6 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
-// Create a new Sequelize model for the `Post` table that will be used to query and manage blog posts.  They will have subject, email, message, and datetime of post
 class Post extends Model {}
 
 Post.init(
