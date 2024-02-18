@@ -1,9 +1,9 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
-class posts extends Model {}
+class Post extends Model {}
 
-posts.init(
+Post.init(
   {
     id: {
       type: DataTypes.INTEGER,
@@ -40,8 +40,8 @@ posts.init(
     sequelize,
     freezeTableName: true,
     underscored: true,
-    modelName: 'posts',
+    modelName: 'post', // Change 'posts' to 'post'
   }
 );
 
-module.exports = posts;
+module.exports = Post; // Change 'posts' to 'Post'

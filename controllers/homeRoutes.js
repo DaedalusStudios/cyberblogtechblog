@@ -1,29 +1,25 @@
 const router = require('express').Router();
 const sequelize = require('../config/connection');
-const { post, comments } = require('../models');
-const user = require('../models/users');
-
-
-
+const Post = require('../models/post');
+const Comment = require('../models/comments');
+const User = require('../models/users');
 
 router.get('/', async (req, res) => {
   try {
     // Fetch posts with comment count
-    const postData = await post.findAll({
+    const postData = await Post.findAll({
       order: [['date', 'DESC']],
       include: [{
-        model: comments,
-        attributes: [],
-        required: false,
-        freezeTableName: true,
+        model: Comment,
+        attributes: [], // Exclude other comment attributes, we only need the count
+        required: false, // Use left join to include posts without comments
       }],
       attributes: {
         include: [
-          [sequelize.fn('COUNT', sequelize.col('comments.post_id')), 'commentCount'],
+          [sequelize.fn('COUNT', sequelize.col('Comments.post_id')), 'commentCount'],
         ],
-        freezeTableName: true,
       },
-      group: ['post.id'], // Group by post id to count comments per post
+      group: ['Post.id'], // Group by post id to count comments per post
     });
 
     const posts = postData.map(post => post.toJSON());
@@ -42,9 +38,9 @@ router.get('/post/:id', async (req, res) => {
     if (req.session.loggedIn) {
     console.log(`This is the failure: ${req.session.email}`);
     // Fetch a single post by id
-    const postData = await post.findByPk(req.params.id, {
+    const postData = await Post.findByPk(req.params.id, {
       include: [
-        { model: comments }
+        { model: Comment }
       ]
     });
     const post = postData.toJSON();
@@ -66,7 +62,7 @@ router.get('/post/:id', async (req, res) => {
 
 router.get('/user/:id', async (req, res) => {
   try {
-    const userData = await user.findByPk(req.params.id, {
+    const userData = await User.findByPk(req.params.id, {
       attributes: { exclude: ['password'] },
     });
 
@@ -80,20 +76,13 @@ router.get('/user/:id', async (req, res) => {
 )
 
 router.get('/login', (req, res) => {
-  try {
   if (req.session.loggedIn) {
     res.redirect('/');
     return;
   }
   const message = req.query.message;
   res.render('login', { message });
-  }
-  catch (err) {
-    console.log(err);
-    res.status(500).json(err);
-  }
 });
-
 
 router.get('/dashboard', async (req, res) => {
   try {
@@ -102,7 +91,7 @@ router.get('/dashboard', async (req, res) => {
     var myEmail = req.session.email;
     console.log(myEmail);
     
-    const postData = await post.findAll({
+    const postData = await Post.findAll({
           where: {
             email: myEmail
           },
@@ -128,7 +117,7 @@ router.get('/dashboard', async (req, res) => {
 router.get('/editPost/:id', async (req, res) => {
   try {
     if (req.session.loggedIn) {
-    const postData = await post.findByPk(req.params.id);
+    const postData = await Post.findByPk(req.params.id);
     const post = postData.toJSON();
     res.render('editPost', {
       post,
