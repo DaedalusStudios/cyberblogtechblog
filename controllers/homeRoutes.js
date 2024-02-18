@@ -16,7 +16,7 @@ router.get('/', async (req, res) => {
       }],
       attributes: {
         include: [
-          [sequelize.fn('COUNT', sequelize.col('Comments.post_id')), 'commentCount'],
+          [sequelize.fn('COUNT', sequelize.col('comments.post_id')), 'commentCount'],
         ],
       },
       group: ['Post.id'], // Group by post id to count comments per post
