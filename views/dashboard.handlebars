@@ -57,12 +57,12 @@
     </div>
     </div>
   
-    {{#each post.comments as |comment|}}
+    {{#each post.comments as |comments|}}
     <div class="commentBox">
-      <p>{{comment.email}}  {{format_date comment.date}}</p>
-      <p>{{comment.comment}}</p>
+      <p>{{comments.email}}  {{format_date comments.date}}</p>
+      <p>{{comments.comment}}</p>
       {{#ifEquals comment.email user.email}}
-        <button class="delete-comment" data-comment-id={{comment.id}}>Delete</button>
+        <button class="delete-comment" data-comment-id={{comments.id}}>Delete</button>
         {{/ifEquals}}
         </div>
     {{/each}}
