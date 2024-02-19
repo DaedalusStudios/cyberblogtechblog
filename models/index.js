@@ -14,9 +14,9 @@ const Comments = require('./comments.js');
       foreignKey: 'post_id'
     });
     
-    // Comments.belongsTo(Posts, {
-    //   foreignKey: 'id'
-    // });
+    Comments.belongsTo(Posts, {
+      foreignKey: 'id'
+    });
 
 
 
