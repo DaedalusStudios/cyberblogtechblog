@@ -45,7 +45,8 @@ Posts.init(
     sequelize,
     modelName: 'Posts',
     tableName: 'Posts',
-    freezeTableName: true
+    freezeTableName: true,
+    underscored: true,
   }
 );
 

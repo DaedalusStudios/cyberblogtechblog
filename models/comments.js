@@ -40,7 +40,8 @@ Comments.init(
         sequelize,
         modelName: 'Comments',
         tableName: 'Comments',
-        freezeTableName: true
+        freezeTableName: true,
+        underscored: true,
     }
     );
 
