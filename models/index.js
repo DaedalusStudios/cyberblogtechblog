@@ -18,9 +18,4 @@ const Comments = require('./comments.js');
       foreignKey: 'id'
     });
 
-
-
-
-
-
 module.exports = { Users, Posts, Comments };
