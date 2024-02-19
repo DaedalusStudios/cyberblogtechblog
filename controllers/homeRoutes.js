@@ -14,10 +14,10 @@ router.get('/', async (req, res) => {
       }],
       attributes: {
         include: [
-          [sequelize.fn('COUNT', sequelize.col('comments.post_id')), 'commentCount'],
+          [sequelize.fn('COUNT', sequelize.col('Comments.post_id')), 'commentCount'],
         ],
       },
-      group: ['posts.id'], // Group by post id to count comments per post
+      group: ['Posts.id'],
     });
 
     const posts = postData.map(post => post.toJSON());
@@ -35,8 +35,7 @@ router.get('/post/:id', async (req, res) => {
   try {
     if (req.session.loggedIn) {
     console.log(`This is the failure: ${req.session.email}`);
-    // Fetch a single post by id
-    const postData = await Posts.findByPk(req.params.id, {
+      const postData = await Posts.findByPk(req.params.id, {
       include: [
         { model: Comments }
       ]
