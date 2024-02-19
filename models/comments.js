@@ -38,10 +38,9 @@ Comments.init(
     },
     {
         sequelize,
-        modelName: 'comments',
-        tableName: 'comments',
-        freezeTableName: true,
-        tableName: 'comments'
+        modelName: 'Comments',
+        tableName: 'Comments',
+        freezeTableName: true
     }
     );
 

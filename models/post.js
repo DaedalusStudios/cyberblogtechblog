@@ -43,8 +43,8 @@ Posts.init(
   },
   {
     sequelize,
-    modelName: 'posts',
-    tableName: 'posts',
+    modelName: 'Posts',
+    tableName: 'Posts',
     freezeTableName: true
   }
 );
