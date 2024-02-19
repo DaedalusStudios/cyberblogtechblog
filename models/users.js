@@ -23,6 +23,7 @@ Users.init(
       validate: {
         isEmail: true,
       },
+      field: 'email'
     },
     password: {
       type: DataTypes.STRING,
@@ -30,6 +31,7 @@ Users.init(
       validate: {
         len: [6],
       },
+      field: 'password'
     },
   },
   {
@@ -40,9 +42,10 @@ Users.init(
       },
     },
     sequelize,
+    modelName: 'users',
+    tableName: 'users',
     timestamps: false,
-    freezeTableName: true,
-    underscored: true,
+    freezeTableName: true
   }
 );
 

@@ -13,33 +13,39 @@ Posts.init(
     },
     subject: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      field: 'subject'
     },
     email: {
       type: DataTypes.STRING,
-      allowNull: false
+      allowNull: false,
+      field: 'email'
     },
     message: {
       type: DataTypes.TEXT,
-      allowNull: false
+      allowNull: false,
+      field: 'message'
     },
     date: {
       type: DataTypes.DATE,
       allowNull: false,
-      defaultValue: DataTypes.NOW
+      defaultValue: DataTypes.NOW,
+      field: 'date'
     },
     user_id: {
       type: DataTypes.INTEGER,
       references: {
-        model: 'users',
+        model: 'Users',
         key: 'id'
-      }
+      },
+      field: 'user_id'
     }
   },
   {
     sequelize,
-    freezeTableName: true,
-    underscored: true,
+    modelName: 'posts',
+    tableName: 'posts',
+    freezeTableName: true
   }
 );
 
