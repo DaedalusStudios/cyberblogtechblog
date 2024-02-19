@@ -1,25 +1,23 @@
 const router = require('express').Router();
 const sequelize = require('../config/connection');
-const Post = require('../models/post');
-const Comment = require('../models/comments');
-const User = require('../models/users');
+const { Posts, Comments, Users } = require('../models');
+
 
 router.get('/', async (req, res) => {
   try {
-    // Fetch posts with comment count
-    const postData = await Post.findAll({
+    const postData = await Posts.findAll({
       order: [['date', 'DESC']],
       include: [{
-        model: Comment,
-        attributes: [], // Exclude other comment attributes, we only need the count
-        required: false, // Use left join to include posts without comments
+        model: Comments,
+        attributes: [],
+        required: false,
       }],
       attributes: {
         include: [
           [sequelize.fn('COUNT', sequelize.col('comments.post_id')), 'commentCount'],
         ],
       },
-      group: ['Post.id'], // Group by post id to count comments per post
+      group: ['posts.id'], // Group by post id to count comments per post
     });
 
     const posts = postData.map(post => post.toJSON());
@@ -38,14 +36,15 @@ router.get('/post/:id', async (req, res) => {
     if (req.session.loggedIn) {
     console.log(`This is the failure: ${req.session.email}`);
     // Fetch a single post by id
-    const postData = await Post.findByPk(req.params.id, {
+    const postData = await Posts.findByPk(req.params.id, {
       include: [
-        { model: Comment }
+        { model: Comments }
       ]
     });
     const post = postData.toJSON();
     res.render('singlePost', {
       post,
+
       loggedIn: req.session.loggedIn,
       sessionEmail: req.session.email
     });
@@ -62,7 +61,7 @@ router.get('/post/:id', async (req, res) => {
 
 router.get('/user/:id', async (req, res) => {
   try {
-    const userData = await User.findByPk(req.params.id, {
+    const userData = await Users.findByPk(req.params.id, {
       attributes: { exclude: ['password'] },
     });
 
@@ -91,7 +90,7 @@ router.get('/dashboard', async (req, res) => {
     var myEmail = req.session.email;
     console.log(myEmail);
     
-    const postData = await Post.findAll({
+    const postData = await Posts.findAll({
           where: {
             email: myEmail
           },

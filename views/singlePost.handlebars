@@ -17,20 +17,7 @@
     </div>
 </div>  
 
-{{!-- Create form to make a new comment --}}
-<div class="row postheader">
-    <div class="col-md-12">Comment on this post:</div>
-</div>
-<div class="row comment">
-<form class="new-comment" method="POST" action="/api/comment">
-  <div class="form-group">
-    <textarea id="comment" rows="4" cols="10" style="width:100%" name="comment" class="form-control" required></textarea>
-  </div>
-  <input type="hidden" name="post_id" value="{{post.id}}">
-  <button type="submit" class="btn btn-primary">Create</button>
-</form>
-</div>
-    {{#each post.comment as |comment|}}
+{{#each post.comments as |comment|}}
     <div class="row postheader">
     <div class="col-sm-6">
     </div>
@@ -53,6 +40,21 @@
         {{/ifEquals}}
         </div>
     {{/each}}
+
+<div class="row postheader">
+    <div class="col-md-12">Comment on this post:</div>
+</div>
+<div class="row comment">
+<form class="new-comment" method="POST" action="/api/comment">
+  <div class="form-group">
+    <textarea id="comment" rows="4" cols="10" style="width:100%" name="comment" class="form-control" required></textarea>
+  </div>
+  <input type="hidden" name="post_id" value="{{post.id}}">
+  <button type="submit" class="btn btn-primary">Create</button>
+</form>
+</div>
+    
+    
     
     
 

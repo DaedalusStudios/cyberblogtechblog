@@ -1,9 +1,9 @@
 const router = require('express').Router();
-const { Post, User } = require('../../models');
+const { Posts, Comments } = require('../../models');
 
 router.post('/', async (req, res) => {
     try {
-        const newPost = await Post.create({
+        const newPost = await Posts.create({
         subject: req.body.subject,
         message: req.body.message,
         email: req.session.email,
@@ -12,14 +12,14 @@ router.post('/', async (req, res) => {
         console.log(newPost.toJSON());
         res.redirect('/dashboard?message=Post created successfully!');
     } catch (err) {
-        console.log(err);
-        res.status(400).json(err);
+        res.redirect(`/dashboard?message=${err}`);
+        
     }
     });
 
 router.post('/:id', async (req, res) => {
     try {
-        const postData = await Post.update(req.body, {
+        const postData = await Posts.update(req.body, {
         where: {
             id: req.params.id,
         },
@@ -36,7 +36,7 @@ router.post('/:id', async (req, res) => {
 
 router.delete('/:id', async (req, res) => {
     try {
-        const postData = await Post.destroy({
+        const postData = await Posts.destroy({
         where: {
             id: req.params.id,
         },

@@ -1,25 +1,25 @@
-const {comments, user} = require('../../models');
+const {Comments, user} = require('../../models');
 const router = require('express').Router();
 
 router.post('/', async (req, res) => {
     try {
 
-        const newComment = await Comment.create({
-        comments: req.body.comments,
+        const newComment = await Comments.create({
+        comment: req.body.comment,
         post_id: req.body.post_id,
         email: req.session.email,
         });
         
         res.redirect('/post/' + req.body.post_id);
     } catch (err) {
-        console.log("You have hit the 400 path " + err);
-        res.status(400).json(err);
+        var message = encodeURIComponent('Error creating comment');
+        res.redirect(`/login?message=${message}`);
     }
     });
 
 router.put('/:id', async (req, res) => {
     try {
-        const commentData = await comments.update(req.body, {
+        const commentData = await Comments.update(req.body, {
         where: {
             id: req.params.id,
         },
@@ -37,7 +37,7 @@ router.put('/:id', async (req, res) => {
 
 router.delete('/:id', async (req, res) => {
     try {
-        const commentData = await comments.destroy({
+        const commentData = await Comments.destroy({
         where: {
             id: req.params.id,
         },
@@ -48,7 +48,7 @@ router.delete('/:id', async (req, res) => {
         }
         res.status(200).json(commentData);
     } catch (err) {
-        res.status(500).json(err);
+        res.status(500).json({ message: `err` });
     }
     }
 );
