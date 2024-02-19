@@ -4,7 +4,7 @@
         "post_id": 1,
         "name": "John Doe",
         "email": "john@doe.com",
-        "comment": "This is a comment"
+        "comment": "This is a test comment.  Great job!"
     },
     {
         "id": 2,
