@@ -43,7 +43,6 @@ router.get('/post/:id', async (req, res) => {
     const post = postData.toJSON();
     res.render('singlePost', {
       post,
-
       loggedIn: req.session.loggedIn,
       sessionEmail: req.session.email
     });

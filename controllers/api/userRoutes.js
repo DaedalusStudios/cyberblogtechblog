@@ -1,10 +1,8 @@
 const router = require('express').Router();
 const { Users } = require('../../models');
 
-// CREATE new user
 router.post('/', async (req, res) => {
   try {
-    // Check if the email already exists in the database
     const existingUser = await Users.findOne({
       where: {
         email: req.body.email
@@ -12,18 +10,15 @@ router.post('/', async (req, res) => {
     });
 
     if (existingUser) {
-      // If the email already exists, redirect the user to the login page
       return res.redirect('/login?message=Email already exists. Please log in!');
     }
 
-    // If the email does not exist, create a new user
     const dbUserData = await Users.create({
       username: req.body.username,
       email: req.body.email,
       password: req.body.password,
     });
 
-    // Set up sessions with a 'loggedIn' variable set to `true`
     req.session.save(() => {
       req.session.user_id = dbUserData.id;
       req.session.username = dbUserData.username;
@@ -37,7 +32,6 @@ router.post('/', async (req, res) => {
   }
 });
 
-// Login
 router.post('/login', async (req, res) => {
   try {
     const dbUserData = await Users.findOne({
@@ -56,7 +50,6 @@ router.post('/login', async (req, res) => {
       return res.redirect('/login?message=Incorrect email or password. Please try again!!');
     }
 
-    // Once the user successfully logs in, set up the sessions variable 'loggedIn'
     req.session.save(() => {
       req.session.user_id = dbUserData.id;
       req.session.username = dbUserData.username;
@@ -71,12 +64,9 @@ router.post('/login', async (req, res) => {
   }
 });
 
-// Logout
 router.get('/logout', (req, res) => {
-  // When the user logs out, destroy the session
   if (req.session.loggedIn) {
     req.session.destroy(() => {
-      //res.status(204).end();
       res.redirect('/');
     });
   } else {

@@ -3,7 +3,6 @@ const router = require('express').Router();
 
 router.post('/', async (req, res) => {
     try {
-
         const newComment = await Comments.create({
         comment: req.body.comment,
         post_id: req.body.post_id,
@@ -13,7 +12,8 @@ router.post('/', async (req, res) => {
         res.redirect('/post/' + req.body.post_id);
     } catch (err) {
         var message = encodeURIComponent('Error creating comment');
-        res.redirect(`/login?message=${message}`);
+        //res.redirect(`/login?message=${message}`);
+        res.status(500).json(err);
     }
     });
 
