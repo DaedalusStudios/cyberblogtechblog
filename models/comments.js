@@ -39,7 +39,7 @@ Comments.init(
     {
         sequelize,
         modelName: 'Comments',
-        tableName: 'Comments',
+        tableName: 'comments',
         freezeTableName: true,
         underscored: true,
     }
